@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
 
-const SearchBar = ({ onSubmit }) => {
-  const [input, setInput] = useState('');
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
 
-  const handleSubmit = e => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const [input, setInput] = useState<string>('');
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(input);
     setInput('');
@@ -29,5 +33,3 @@ const SearchBar = ({ onSubmit }) => {
 };
 
 export default SearchBar;
-
-

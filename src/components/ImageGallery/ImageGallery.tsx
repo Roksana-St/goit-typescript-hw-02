@@ -1,8 +1,14 @@
 import React from 'react';
 import ImageCard from '../ImageCard/ImageCard';
 import styles from './ImageGallery.module.css';
+import { UnsplashImage } from '../../types';
 
-const ImageGallery = ({ images, onImageClick }) => {
+interface ImageGalleryProps {
+  images: UnsplashImage[];
+  onImageClick: (imageUrl: string) => void;
+}
+
+const ImageGallery: React.FC<ImageGalleryProps> = ({ images, onImageClick }) => {
   return (
     <ul className={styles.gallery}>
       {images.map((image) => (
@@ -19,4 +25,3 @@ const ImageGallery = ({ images, onImageClick }) => {
 };
 
 export default ImageGallery;
-

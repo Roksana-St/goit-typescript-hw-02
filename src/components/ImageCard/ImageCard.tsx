@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './ImageCard.module.css';
 
-const ImageCard = ({ imageUrl, alt, onClick }) => {
+interface ImageCardProps {
+  imageUrl: string;
+  alt: string;
+  onClick: () => void;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, alt, onClick }) => {
   return (
     <div className={styles.card} onClick={onClick}>
       <img src={imageUrl} alt={alt} className={styles.image} />
@@ -10,5 +16,3 @@ const ImageCard = ({ imageUrl, alt, onClick }) => {
 };
 
 export default ImageCard;
-
-

@@ -5,19 +5,20 @@ import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import Loader from '../Loader/Loader';
 import ImageModal from '../ImageModal/ImageModal'; 
 import { fetchImages } from '../../api/unsplashAPI';
+import { UnsplashImage } from '../../types';
 import styles from './App.module.css';
 import toast, { Toaster } from 'react-hot-toast';
+import React from 'react';
 
 const App = () => {
-  const [images, setImages] = useState([]);
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [totalImages, setTotalImages] = useState(0);
-
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [selectedImage, setSelectedImage] = useState(null); 
+  const [images, setImages] = useState<UnsplashImage[]>([]);
+  const [query, setQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [totalImages, setTotalImages] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); 
+  const [selectedImage, setSelectedImage] = useState<string | null>(null); 
 
   useEffect(() => {
     if (!query) return;
@@ -38,7 +39,7 @@ const App = () => {
     fetchData();
   }, [query, page]);
 
-  const handleSearch = newQuery => {
+  const handleSearch = (newQuery: string) => {
     if (newQuery.trim() === '') {
       toast.error('Please enter a search query');
       return;
@@ -52,7 +53,7 @@ const App = () => {
     setPage(prevPage => prevPage + 1);
   };
 
-  const openModal = (imageUrl) => {
+  const openModal = (imageUrl: string) => {
     setSelectedImage(imageUrl);
     setIsModalOpen(true);
   };
@@ -77,7 +78,7 @@ const App = () => {
         <ImageModal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
-          imageUrl={selectedImage}
+          imageUrl={selectedImage!}
           alt="Selected image"
         />
       )}
